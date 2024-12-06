@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Parse Display</title>
+  <script>
+    // Replace this array with your actual parses
+    const parses = [
+      "give me roboox",
+      "give one million robox obby",
+      "i drink toilet water",
+      // ... more parses
+    ];
+
+    // Function to select a random parse and display it
+    function displayRandomParse() {
+      const randomIndex = Math.floor(Math.random() * parses.length);
+      const selectedParse = parses[randomIndex];
+
+      // Assuming you have a div with id 'parse-display'
+      document.getElementById('parse-display').textContent = selectedParse;
+    }
+
+    // Call the function to display the parse on page load
+    window.onload = displayRandomParse;
+  </script>
+</head>
+<body>
+  <div id="parse-display"></div>
+</body>
+</html>
