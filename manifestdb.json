@@ -2,7 +2,7 @@
   "name": "Dodge Balls!",
   "short_name": "Dodge Balls",
   "description": "Play Dodge Balls it helps me out a ton!",
-  "start_url": "/",
+  "start_url": "https://thom283.github.io/probable-fishstick/DodgeBalls.html",
   "display": "standalone", 
   "background_color": "#ffffff",
   "theme_color": "#3f51b5", 
