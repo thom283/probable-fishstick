@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #statusMessage {
+            margin-top: 10px;
+            font-style: italic;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Notepad</h1>
+
+    <textarea id="TextArea" placeholder="Start writing..."></textarea>
+
+    <button id="saveButton">Save</button>
+
+    <p id="statusMessage"></p>
+
+    <script>
+
+        const TextArea = document.getElementById('TextArea');
+        const saveButton = document.getElementById('saveButton');
+        const statusMessage = document.getElementById('statusMessage');
+
+        
+        function saveText() {
+            const textToSave = TextArea.value;
+            localStorage.setItem('savedNote', textToSave);
+            statusMessage.textContent = 'Saved!';
+            statusMessage.style.color = 'green';
+            setTimeout(() => {
+                statusMessage.textContent = '';
+            }, 3000);
+        }
+
+
+        function loadText() {
+            const loadedText = localStorage.getItem('savedNote');
+            if (loadedText) {
+                TextArea.value = loadedText;
+                statusMessage.textContent = 'Loaded!';
+                statusMessage.style.color = 'green';
+            } else {
+                statusMessage.textContent = 'No saved notes found. Start writing!';
+                statusMessage.style.color = 'gray';
+            }
+            setTimeout(() => {
+                statusMessage.textContent = '';
+            }, 3000);
+        }
+
+
+        window.addEventListener('load', loadText);
+
+        saveButton.addEventListener('click', saveText);
+
+        let typingTimer;
+        const doneTypingInterval = 1000;
+
+        TextArea.addEventListener('keyup', () => {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(saveText, doneTypingInterval);
+        });
+
+        TextArea.addEventListener('keydown', () => {
+            clearTimeout(typingTimer);
+        });
+
+    </script>
+</body>
+</html>
